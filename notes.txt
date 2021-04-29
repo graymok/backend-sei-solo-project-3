@@ -1,0 +1,10 @@
+sequelize model:generate --name=user --attributes name:string,email:string,password:string,workstyleId:integer
+sequelize model:generate --name=reservation --attributes userId:integer,spaceId:integer,date:string,time:string
+sequelize model:generate --name=space --attributes name:string,description:string,capacity:string,image:string,type:string
+sequelize model:generate --name=workstyle --attributes name:string,description:string
+
+sequelize model:generate --name=recommendation --attributes workstyleId:integer,spaceId:integer
+
+
+sequelize seed:generate --name=space-seed
+sequelize seed:generate --name=workstyle-seed
