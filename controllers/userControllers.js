@@ -1,9 +1,13 @@
 const models = require('../models')
 const userControllers = {}
 const jwt = require('jsonwebtoken')
+const wrkstyleArr = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
 
 userControllers.createUser = async (req, res) => {
     try {
+
+
+        
         const user = await models.user.create({
             name: req.body.name,
             email: req.body.email,
