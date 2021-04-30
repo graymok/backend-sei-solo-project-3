@@ -1,5 +1,5 @@
 const userRoutes = require('express').Router()
-const userControllers = require('../controllers/UserController')
+const userControllers = require('../controllers/UserControllers')
 
 userRoutes.post('/', userControllers.createUser)
 userRoutes.post('/login', userControllers.loginUser)

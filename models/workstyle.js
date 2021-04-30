@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.workstyle.hasMany(models.user)
+      models.workstyle.hasMany(models.space)
     }
   };
   workstyle.init({

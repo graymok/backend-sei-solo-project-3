@@ -8,3 +8,51 @@ sequelize model:generate --name=recommendation --attributes workstyleId:integer,
 
 sequelize seed:generate --name=space-seed
 sequelize seed:generate --name=workstyle-seed
+
+
+
+
+
+
+
+
+
+Workstyle Assessment
+Anchored - Mobile
+Focused - Collaborative
+Introvert - Extrovert
+
+Wrkpoint, Wrktype
+
+What type of work do you mostly do?
+A. Heads down focus work
+B. Mix of focus and interactive work
+C. Interactive work with others
+
+What type of atmosphere helps you get your best work done?
+1. Quiet like a library
+2. Energetic like a coffee shop
+
+
+A1, A2 - Thinker, Builder
+B1, B2 - Designer, Developer
+C1, C2 - Counselor, Connector
+
+
+
+Individual - bench desk (Work), touch down table (Learn), focus room/office (Focus), open pod (Study)
+Collaborative - open table (Break), open soft (Gather), enclosed soft (Create), enclosed meeting (Meet)
+Social - cafe (Sustain), lobby (Arrive), town hall (Assemble)
+
+Thinker: Focus
+Builder: Work
+Designer: Create
+Developer: Break
+Counselor: Meet
+Connector: Gather
+
+Learn
+Study
+Sustain
+Arrive
+Assemble

@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.space.belongsToMany(models.user, {through: 'reservation'})
+      models.space.belongsTo(models.workstyle)
     }
   };
   space.init({
@@ -19,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     capacity: DataTypes.STRING,
     image: DataTypes.STRING,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    workstyleId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'space',
