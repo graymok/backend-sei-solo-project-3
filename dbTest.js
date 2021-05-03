@@ -1,15 +1,50 @@
 const models = require('./models')
 
 
+const additional = async () => {
+/*     const support = await models.workstyle.create({
+        name: 'Support',
+        description: 'Supporting any work mode',
+        code: 'D1'
+    })
 
+    const learn = await models.space.findOne({
+        where: {
+            name: '03'
+        }
+    })
 
+    const sustain = await models.space.findOne({
+        where: {
+            name: '14'
+        }
+    })
 
+    const arrive = await models.space.findOne({
+        where: {
+            name: '15'
+        }
+    }) */
 
+    const support = await models.workstyle.findOne({
+        where: {
+            name: 'Support'
+        }
+    })
 
+    const assemble = await models.space.findOne({
+        where: {
+            name: '16'
+        }
+    })
+/* 
+    const saved1 = await support.addSpace(learn)
+    const saved2 = await support.addSpace(sustain)
+    const saved3 = await support.addSpace(arrive) */
+    const saved4 = await support.addSpace(assemble)
+}
 
-
-
-
+additional()
 
 
 /* const workstyles = async () => {
@@ -133,9 +168,6 @@ const models = require('./models')
 
     const save11 = await Connector.addSpace(gather1)
     const save12 = await Connector.addSpace(gather2)
-
-
-
 
 }
 

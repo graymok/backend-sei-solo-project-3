@@ -8,6 +8,7 @@ const routesReport = rowdy.begin(app)
 const morgan = require('morgan')
 
 const userRoutes = require('./routes/userRoutes')
+const spaceRoutes = require('./routes/spaceRoutes')
 
 app.use(express.json())
 app.use(require('cors')())
@@ -15,6 +16,7 @@ app.use(morgan('tiny'))
 
 
 app.use('/users', userRoutes)
+app.use('/spaces', spaceRoutes)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {

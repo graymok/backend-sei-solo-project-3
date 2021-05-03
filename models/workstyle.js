@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   workstyle.init({
     name: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    code: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'workstyle',

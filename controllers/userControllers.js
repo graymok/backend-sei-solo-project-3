@@ -1,12 +1,16 @@
 const models = require('../models')
 const userControllers = {}
 const jwt = require('jsonwebtoken')
-const wrkstyleArr = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
+
+
 
 userControllers.createUser = async (req, res) => {
     try {
-
-
+        const workstyle = await models.workstyle.findOne({
+            where: {
+                code: req.body.workstyle
+            }
+        })
         
         const user = await models.user.create({
             name: req.body.name,
@@ -14,9 +18,17 @@ userControllers.createUser = async (req, res) => {
             password: req.body.password
         })
 
+        const setWorkstyle = await user.setWorkstyle(workstyle)
+
         const encryptedId = jwt.sign( { userId: user.id }, process.env.JWT_SECRET)
 
-        res.json({message: 'Signup successful!', userId: encryptedId, user})
+        res.json({message: 'Signup successful!', user: {
+            id: encryptedId,
+            name: user.name,
+            email: user.email,
+            workstyle: workstyle.name,
+            workstyleDetail: workstyle.description
+        }})
 
     } catch (error) {
         console.log(error)
@@ -32,10 +44,18 @@ userControllers.loginUser = async (req, res) => {
             }
         })
 
+        const workstyle = await user.getWorkstyle()
+
         const encryptedId = jwt.sign ( { userId: user.id }, process.env.JWT_SECRET)
 
         if ( user.verifyPassword(req.body.password) ) {
-            res.json({message: 'Login successful', userId: encryptedId, user})
+            res.json({message: 'Login successful', user: {
+                id: encryptedId,
+                name: user.name,
+                email: user.email,
+                workstyle: workstyle.name,
+                workstyleDetail: workstyle.description
+            }})
         } else {
             res.status(400)
             res.json({error: 'Login failed'})
@@ -58,9 +78,17 @@ userControllers.verifyUser = async (req, res) => {
             }
         })
 
+        const workstyle = await user.getWorkstyle()
+
         const encryptedId = jwt.sign ( { userId: user.id }, process.env.JWT_SECRET)
 
-        res.json({message: 'User verified', userId: encryptedId, user})
+        res.json({message: 'User verified', user: {
+            id: encryptedId,
+            name: user.name,
+            email: user.email,
+            workstyle: workstyle.name,
+            workstyleDetail: workstyle.description
+        }})
     } catch (error) {
         console.log(error)
         res.status(400)
