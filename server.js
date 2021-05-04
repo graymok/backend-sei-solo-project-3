@@ -15,11 +15,13 @@ app.use(require('cors')())
 app.use(morgan('tiny'))
 
 
-app.use('/users', userRoutes)
-app.use('/spaces', spaceRoutes)
+
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`We're live on ${PORT}`)
   routesReport.print()
 })
+
+app.use('/users', userRoutes)
+app.use('/spaces', spaceRoutes)
