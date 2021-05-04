@@ -65,7 +65,49 @@ spaceControllers.getReservations = async (req, res) => {
 
 spaceControllers.reserveSpace = async (req, res) => {
     try {
-        
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+
+        const user = await models.user.findOne({
+            where: {
+                id: decryptedId.userId
+            }
+        })
+
+        const space = await models.space.findOne({
+            where: {
+                id: req.body.spaceId
+            }
+        })
+
+        const checkReservation = await models.reservation.findOne({
+            where: {
+                spaceId: space.id,
+                date: req.body.date
+            }
+        })
+
+        console.log('Checking reservation', checkReservation)
+
+        if ( checkReservation !== null ) {
+            console.log('Reservation unavailable')
+        } else {
+            console.log('Reservation available')
+        }
+
+/*         if ( checkReservation === true ) {
+            res.json({reservation: false})
+        } else {
+            const reservation = await models.reservation.findOrCreate({
+                where: {
+                    userId: user.id,
+                    spaceId: space.id,
+                    date: req.body.date
+                }
+            })
+            res.json({reservation: true})
+        } */
+
+        res.json({message: `We're working on it`})
         
     } catch (error) {
         console.log(error)
