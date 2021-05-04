@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.space.belongsToMany(models.user, {through: 'reservation'})
       models.space.belongsTo(models.workstyle)
+      models.space.hasMany(models.reservation)
     }
   };
   space.init({

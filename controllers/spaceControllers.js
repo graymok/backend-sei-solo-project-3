@@ -53,7 +53,13 @@ spaceControllers.getReservations = async (req, res) => {
             }
         })
 
-        const reservations = await user.getSpaces()
+        const reservations = await models.reservation.findAll({
+            where: {
+                userId: user.id
+            }/* , include: [models.space] */
+        })
+
+        console.log(reservations)
 
         res.json({reservations})
         
@@ -86,28 +92,36 @@ spaceControllers.reserveSpace = async (req, res) => {
             }
         })
 
-        console.log('Checking reservation', checkReservation)
+        const checkUserReservation = await models.reservation.findOne({
+            where: {
+                userId: user.id,
+                spaceId: space.id,
+                date: req.body.date
+            }
+        })
 
-        if ( checkReservation !== null ) {
-            console.log('Reservation unavailable')
+        if ( checkReservation !== null && checkUserReservation !== null ) {
+            res.json({reserved: 'user'})
+        } else if ( checkReservation !== null && checkUserReservation === null ) {
+            res.json({reserved: 'failure'})
         } else {
-            console.log('Reservation available')
-        }
+            const reserveSpace = await user.addSpace(space)
 
-/*         if ( checkReservation === true ) {
-            res.json({reservation: false})
-        } else {
-            const reservation = await models.reservation.findOrCreate({
+            const reservation = await models.reservation.findOne({
                 where: {
                     userId: user.id,
-                    spaceId: space.id,
-                    date: req.body.date
+                    spaceId: space.id
                 }
             })
-            res.json({reservation: true})
-        } */
 
-        res.json({message: `We're working on it`})
+            const reserveDate = await reservation.update({
+                date: req.body.date
+            })
+
+            console.log(reservation)
+
+            res.json({reserved: 'success'})
+        }
         
     } catch (error) {
         console.log(error)

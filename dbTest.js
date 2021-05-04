@@ -1,12 +1,7 @@
 const models = require('./models')
 
 
-const additional = async () => {
-/*     const support = await models.workstyle.create({
-        name: 'Support',
-        description: 'Supporting any work mode',
-        code: 'D1'
-    })
+/* const additional = async () => {
 
     const learn = await models.space.findOne({
         where: {
@@ -24,7 +19,13 @@ const additional = async () => {
         where: {
             name: '15'
         }
-    }) */
+    })
+
+    const assemble = await models.space.findOne({
+        where: {
+            name: '16'
+        }
+    })    
 
     const support = await models.workstyle.findOne({
         where: {
@@ -32,19 +33,13 @@ const additional = async () => {
         }
     })
 
-    const assemble = await models.space.findOne({
-        where: {
-            name: '16'
-        }
-    })
-/* 
     const saved1 = await support.addSpace(learn)
     const saved2 = await support.addSpace(sustain)
-    const saved3 = await support.addSpace(arrive) */
+    const saved3 = await support.addSpace(arrive)
     const saved4 = await support.addSpace(assemble)
 }
 
-additional()
+additional() */
 
 
 /* const workstyles = async () => {

@@ -19,7 +19,8 @@ module.exports = {
       {name: 'The Designer', description: 'You get your best work done in quiet work spaces that support both focus and interactive work modes.', code: 'B1'},
       {name: 'The Developer', description: 'You get your best work done in dynamic work spaces that support both focus and interactive work modes.', code: 'B2'},
       {name: 'The Counselor', description: 'You get your best work done in quiet work spaces that support interactive work modes.', code: 'C1'},
-      {name: 'The Connector', description: 'You get your best work done in dynamic work spaces that support interactive work modes.', code: 'C2'}
+      {name: 'The Connector', description: 'You get your best work done in dynamic work spaces that support interactive work modes.', code: 'C2'},
+      {name: 'Support', description: 'Supporting all work modes', code: 'D1'}
     ])
   },
 
