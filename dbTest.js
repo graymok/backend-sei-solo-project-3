@@ -1,7 +1,7 @@
 const models = require('./models')
 
 
-/* const additional = async () => {
+const additional = async () => {
 
     const learn = await models.space.findOne({
         where: {
@@ -39,10 +39,10 @@ const models = require('./models')
     const saved4 = await support.addSpace(assemble)
 }
 
-additional() */
+additional()
 
 
-/* const workstyles = async () => {
+const workstyles = async () => {
     const Thinker = await models.workstyle.findOne({
         where: {
             name: 'The Thinker'
@@ -166,4 +166,4 @@ additional() */
 
 }
 
-workstyles() */
+workstyles()
