@@ -56,10 +56,13 @@ spaceControllers.getReservations = async (req, res) => {
         const reservations = await models.reservation.findAll({
             where: {
                 userId: user.id
-            }/* , include: [models.space] */
+            },
+            include: [
+                {
+                    model: models.space
+                }
+            ]
         })
-
-        console.log(reservations)
 
         res.json({reservations})
         
