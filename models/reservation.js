@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.reservation.belongsTo(models.space)
+      models.reservation.belongsTo(models.user)
     }
   };
   reservation.init({

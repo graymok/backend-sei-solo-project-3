@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.user.belongsTo(models.workstyle)
       models.user.belongsToMany(models.space, {through: 'reservation'})
+      models.user.hasMany(models.reservation)
     }
     verifyPassword(input) {
       return bcrypt.compareSync(input, this.password)

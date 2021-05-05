@@ -57,11 +57,15 @@ spaceControllers.getReservations = async (req, res) => {
             where: {
                 userId: user.id
             },
+            order: [
+                ['date', 'ASC']
+            ],
             include: [
                 {
                     model: models.space
                 }
-            ]
+            ],
+
         })
 
         res.json({reservations})
@@ -108,20 +112,11 @@ spaceControllers.reserveSpace = async (req, res) => {
         } else if ( checkReservation !== null && checkUserReservation === null ) {
             res.json({reserved: 'failure'})
         } else {
-            const reserveSpace = await user.addSpace(space)
-
-            const reservation = await models.reservation.findOne({
-                where: {
-                    userId: user.id,
-                    spaceId: space.id
-                }
-            })
-
-            const reserveDate = await reservation.update({
+            const reservation = await models.reservation.create({
+                userId: user.id,
+                spaceId: space.id,
                 date: req.body.date
             })
-
-            console.log(reservation)
 
             res.json({reserved: 'success'})
         }
@@ -132,6 +127,31 @@ spaceControllers.reserveSpace = async (req, res) => {
     }
 }
 
+spaceControllers.deleteReservation = async (req, res) => {
+    try {
+        const decryptedId = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+
+        const user = await models.user.findOne({
+            where: {
+                id: decryptedId.userId
+            }
+        })
+
+        const removedReservation = await models.reservation.destroy({
+            where: {
+                userId: user.id,
+                spaceId: req.body.spaceId,
+                date: req.body.date
+            }
+        })
+
+        res.json({message: 'Reservation removed'})
+
+    } catch (error) {
+        console.log(error)
+        res.status(400)
+    }
+}
 
 
 module.exports = spaceControllers
