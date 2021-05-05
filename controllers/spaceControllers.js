@@ -4,7 +4,11 @@ const jwt = require('jsonwebtoken')
 
 spaceControllers.getAllSpaces = async (req, res) => {
     try {
-        const spaces = await models.space.findAll()
+        const spaces = await models.space.findAll({
+            order: [
+                ['id', 'ASC']
+            ]
+        })
 
         res.json({spaces})
     } catch (error) {
